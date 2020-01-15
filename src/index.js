@@ -1,10 +1,20 @@
 'use strict'
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const path = require('path')
 const { mongoose } = require('./database')
 
 const app = express()
+
+app.use(
+  cors({
+    credentials: true,
+    origin: true
+  })
+)
+
+app.options('*', cors())
 
 app.set('port', process.env.PORT || 8080)
 
