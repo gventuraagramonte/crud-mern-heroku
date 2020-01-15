@@ -16,7 +16,7 @@ app.use(
 
 app.options('*', cors())
 
-app.set('port', process.env.PORT || 8080)
+app.set('port', process.env.PORT || 3000)
 
 app.use(morgan('dev'))
 app.use(express.json())
