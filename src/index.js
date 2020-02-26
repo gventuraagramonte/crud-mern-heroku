@@ -4,27 +4,32 @@ const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
 const { mongoose } = require("./database");
+const hostname = "localhost";
+const port = 3001;
+const app2 = express();
 
-const app = express();
-
-app.use(
+app2.use(
   cors({
     credentials: true,
     origin: true
   })
 );
 
-app.options("*", cors());
+app2.options("*", cors());
 
-app.set("port", process.env.PORT || 3001);
+app2.set("port", process.env.PORT || 3001);
 
-app.use(morgan("dev"));
-app.use(express.json());
+app2.use(morgan("dev"));
+app2.use(express.json());
 
-app.use("/api/tasks", require("./routes/task.routes"));
+app2.use("/api/tasks", require("./routes/task.routes"));
 
-app.use(express.static(path.join(__dirname, "public")));
+app2.use(express.static(path.join(__dirname, "public")));
 
-app.listen(app.get("port"), () => {
-  console.log(`Server on port ${app.get("port")}`);
+// app2.listen(app2.get("port"), () => {
+//   console.log(`Server on port ${app2.get("port")}`);
+// });
+
+app2.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}`);
 });
