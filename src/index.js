@@ -1,30 +1,30 @@
-'use strict'
-const express = require('express')
-const morgan = require('morgan')
-const cors = require('cors')
-const path = require('path')
-const { mongoose } = require('./database')
+"use strict";
+const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
+const path = require("path");
+const { mongoose } = require("./database");
 
-const app = express()
+const app = express();
 
 app.use(
   cors({
     credentials: true,
     origin: true
   })
-)
+);
 
-app.options('*', cors())
+app.options("*", cors());
 
-app.set('port', process.env.PORT || 3000)
+app.set("port", process.env.PORT || 3001);
 
-app.use(morgan('dev'))
-app.use(express.json())
+app.use(morgan("dev"));
+app.use(express.json());
 
-app.use('/api/tasks', require('./routes/task.routes'))
+app.use("/api/tasks", require("./routes/task.routes"));
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, "public")));
 
-app.listen(app.get('port'), () => {
-  console.log(`Server on port ${app.get('port')}`)
-})
+app.listen(app.get("port"), () => {
+  console.log(`Server on port ${app.get("port")}`);
+});
